@@ -37,7 +37,7 @@ export default {
     },
     text: {
       type: String,
-      reequired: true
+      required: true
     },
     src: {
       type: String,

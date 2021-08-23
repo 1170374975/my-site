@@ -7,6 +7,9 @@ import router from './router';  //路由
 import './styles/global.less'; //全局样式
 // import './api/banner'; //引入axios远程请求数据
 import './eventBus'; //事件总线
+import store from './store';//共享数据
+store.dispatch('setting/fetchSetting');
+
 
 Vue.config.productionTip = false
 
@@ -38,7 +41,7 @@ Vue.directive('loading', vLoading);
 new Vue({
   render: h => h(App),
   router,
-  
+  store
 }).$mount('#app')
 
 

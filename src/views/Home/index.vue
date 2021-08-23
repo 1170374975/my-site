@@ -3,7 +3,7 @@
     class="home-container" 
     ref="container" 
     @wheel="handleWheel"
-    v-loading="isLoading"
+    v-loading="loading"
   >
     <ul class="carousel-container"
       :style={marginTop}
@@ -37,14 +37,13 @@
 </template>
 
 <script>
-import fetchData from '@/mixins/fetchData.js'; //混入组件，获取远程数据
 import CarouselItem from './Carouselitem';
-import { getBanners } from '@/api/banner.js';
+// import { getBanners } from '@/api/banner.js';
 import Icon from '@/components/Icon';
-
+import { mapState } from 'vuex'; //首页标语存放在仓库
 
 export default {
-  mixins: [fetchData([])], //组件混入，获取远程数据，传入默认值
+  // mixins: [fetchData([])], //组件混入，获取远程数据，传入默认值
   components: {
     CarouselItem,
     Icon,
@@ -59,7 +58,11 @@ export default {
   computed: {
     marginTop() {
       return -this.index * this.containerHeight + 'px';
-    }
+    },
+    ...mapState('banner', ['loading', 'data'])
+  },
+  created() {
+    this.$store.dispatch('banner/fetchBanner')
   },
   mounted() {
     // console.log(this.$refs.container.clientHeight);
@@ -75,10 +78,6 @@ export default {
     //切换轮播图
     switchTo(i) {
       this.index = i;
-    },
-    async fetchData() {
-      //获取远程数据方法，和组件混入的结合使用
-      return await getBanners()
     },
     handleWheel(e) {
       // console.log(e.deltaY);

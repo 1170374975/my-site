@@ -1,15 +1,15 @@
 <template>
   <div class="site-aside-container">
-    <div class="avatar">
-      <Avatar :url="avatarUrl" />
-      <h1 class="title">妮儿的个人空间</h1>
+    <div v-if="data" class="avatar">
+      <Avatar :url="data.avatar" />
+      <h1 class="title">{{ data.siteTitle }}</h1>
     </div>
 
     <Menu />
     <Contact />
 
-    <p class="footer">
-      黑ICP备17001719号
+    <p v-if="data" class="footer">
+      {{ data.icp }}
     </p>
   </div>
   
@@ -19,7 +19,7 @@
 import Avatar from '@/components/Avatar';
 import Menu from './Menu';
 import Contact from './Contact'
-import avatarUrl from '@/assets/avatar-wn.png';
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -27,11 +27,9 @@ export default {
     Menu,
     Contact
   },
-  data() {
-    return {
-      avatarUrl,
-    }
-  }
+  computed: {
+    ...mapState('setting', ['data'])
+  },
 }
 </script>
 

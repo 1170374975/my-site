@@ -2,6 +2,7 @@
 import Mock from 'mockjs';
 import "./banner";
 import "./blog";
+import "./setting";
 
 
 //模拟远程数据，延迟时间
