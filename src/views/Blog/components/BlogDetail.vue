@@ -7,6 +7,7 @@
       <a href="#data-form-container">评论：{{ blog.commentNumber }}</a>
       <!-- 分类，点击之后跳转到当前分类 -->
       <RouterLink 
+        v-if="blog.category"
         :to="{
           name:'CategoryBlog', 
           params: {

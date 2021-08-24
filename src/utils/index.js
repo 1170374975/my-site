@@ -7,3 +7,6 @@ export { default as formatDate } from './formatDate';
 
 //导入、导出函数防抖
 export { default as debounce } from './debounce'
+
+//导入、导出标题控制函数
+export { default as titleControl } from './titleControl';

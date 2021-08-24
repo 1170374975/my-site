@@ -24,7 +24,7 @@ import Layout from '@/components/Layout'; //三栏布局组件
 import BlogDetail from './components/BlogDetail'; //文章内容组件
 import BlogComment from './components/BlogComment';
 import BlogTOC from './components/BlogTOC'; //文章目录组件
-
+import { titleControl } from '@/utils'; //网页标题控制工具
 
 export default {
   components: {
@@ -42,6 +42,9 @@ export default {
         //文章不存在，
         this.$route.push('/404');
         return ;
+      }
+      if(resp.title) {
+        titleControl.setRouteTitle(resp.title);
       }
       return resp;
     },

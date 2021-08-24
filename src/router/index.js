@@ -1,28 +1,19 @@
 import vue from 'vue';
 import VueRouter from 'vue-router';
-
-const Home = () => import('@/views/Home');
-const Blog = () => import('@/views/Blog');
-const About = () => import('@/views/About');
-const Project = () => import('@/views/Project');
-const Message = () => import('@/views/Message');
-const BlogDetail = () => import('@/views/Blog/Detail.vue');
-
+import routes from './routes';
+import { titleControl } from '@/utils'; //控制标题
 vue.use(VueRouter);
-
-const routes = [
-  { name: 'Home', path: '/', component: Home},
-  { name: 'Blog', path: '/article', component: Blog},
-  { name: 'CategoryBlog', path: '/article/cate/:categoryId', component:Blog },
-  { name: 'BlogDetail', path: '/article/:id', component: BlogDetail },
-  { name: 'About', path: '/about', component: About},
-  { name: 'Project', path: '/project', component: Project},
-  { name: 'Message', path: '/message', component: Message}
-]
 
 const router = new VueRouter({
   routes,
   mode: 'history'
+})
+//导航守卫，设置路由标题
+router.afterEach((to, from) => {
+  // console.log('to',to, 'from',from);
+  if(to.meta.title) {
+    titleControl.setRouteTitle(to.meta.title);
+  }
 })
 
 export default router;

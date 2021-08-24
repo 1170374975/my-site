@@ -1,5 +1,6 @@
 //全局设置-共享数据
 import { getSetting } from '@/api/setting.js';
+import { titleControl } from '@/utils';
 
 export default {
   namespaced: true, //命名空间
@@ -33,6 +34,10 @@ export default {
         link.type = 'images/x-icon';
         link.href = resp.favicon;
         document.querySelector('head').appendChild(link)
+      }
+      //设置网站标题
+      if(resp.siteTitle) {
+        titleControl.setSiteTitle(resp.siteTitle);
       }
       
     }
