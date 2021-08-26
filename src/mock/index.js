@@ -4,6 +4,7 @@ import './banner';
 import './blog';
 import './setting';
 import './about';
+import './project';
 
 
 //模拟远程数据，延迟时间
