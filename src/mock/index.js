@@ -5,7 +5,7 @@ import './blog';
 import './setting';
 import './about';
 import './project';
-
+import './message';
 
 //模拟远程数据，延迟时间
 Mock.setup({
