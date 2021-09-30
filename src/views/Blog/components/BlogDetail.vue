@@ -1,7 +1,7 @@
 <template>
   <div class="blog-detail-container">
     <h1>{{ blog.title }}</h1>
-    <div class="aside">
+    <div class="aside" v-if="blog.createDate">
       <span>日期：{{ formatDate(blog.createDate) }}</span>
       <span>浏览：{{ blog.scanNumber }}</span>
       <a href="#data-form-container">评论：{{ blog.commentNumber }}</a>

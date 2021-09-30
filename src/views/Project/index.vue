@@ -1,5 +1,6 @@
 <template>
   <div class="project-container" v-loading='loading'>
+      <Empty v-if="!data.length && !loading" />
       <a v-for="item in data"
         :key="item.id"
         :href="item.url? item.url : `javascript:alert('该项目无法通过外网访问')`" 
@@ -22,8 +23,12 @@
 
 <script>
 import { mapState } from 'vuex';
+import Empty from '@/components/Empty';
 
 export default {
+  components: {
+    Empty
+  },
   computed: {
     ...mapState('project', ['loading', 'data'])
   },

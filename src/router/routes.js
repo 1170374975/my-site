@@ -4,6 +4,7 @@ import About from '@/views/About';
 import Project from '@/views/Project';
 import Message from '@/views/Message';
 import BlogDetail from '@/views/Blog/Detail';
+import NotFound from '@/views/NotFound';
 
 
 export default [
@@ -62,5 +63,10 @@ export default [
     meta: {
       title: '留言板'
     }
+  },
+  {
+    name: 'NotFound',
+    path: '*', //通配符，都可以匹配到这个
+    component: NotFound,
   }
 ]

@@ -40,7 +40,7 @@ export default {
       // console.log('Detail.vue',resp)
       if(!resp) {
         //文章不存在，
-        this.$route.push('/404');
+        this.$router.push('/404'); //跳转到404页面
         return ;
       }
       if(resp.title) {

@@ -21,29 +21,31 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, "get", function(options){
   //options.url: 拿到地址："/api/blog?page=1&limit=10&categoryid=-1"
   const query = qs.parse(options.url);
   //console.log("query",query) //{/api/blog?page: "1", limit: "10", categoryid: "-1"}
+
+  const data = {
+    "total|2000-3000": 0,
+    [`rows|${query.limit || 10}`]: [
+      {
+        id: "@guid", //guid随机生成一个,全局唯一标识符
+        title: "@ctitle(1, 50)", //随机生成一句中文标题
+        description: "@cparagraph(1, 10)", //随机生成一段中文文本，1-10句
+        category: {
+          "id|1-10": 0,
+          name: "分类@id",
+        },
+        "scanNumber|0-3000": 0, //浏览数量
+        "commentNumber|0-300": 30, //评论数量
+        //缩略图地址：用于生成高度自定义的图片地址(宽高、背景色、图片的前景色，指示图片上的文字)
+        // "thumb|1": [Mock.Random.image("300x250", "#000","#fff", "Random Image"), null], //缩略图，任意选一个，可有可无
+        "thumb|1": ["@image(300x250, @color, #fff, @natural)"], //随机颜色，随机数
+        createDate: `@date('T')` //创建时间：返回一个随机的日期字符串，时间戳
+      }
+    ]
+  }
   return Mock.mock({
     code: 0,
     msg: "",
-    data: {
-      "total|2000-3000": 0,
-      [`rows|${query.limit || 10}`]: [
-        {
-          id: "@guid", //guid随机生成一个,全局唯一标识符
-          title: "@ctitle(1, 50)", //随机生成一句中文标题
-          description: "@cparagraph(1, 10)", //随机生成一段中文文本，1-10句
-          category: {
-            "id|1-10": 0,
-            name: "分类@id",
-          },
-          "scanNumber|0-3000": 0, //浏览数量
-          "commentNumber|0-300": 30, //评论数量
-          //缩略图地址：用于生成高度自定义的图片地址(宽高、背景色、图片的前景色，指示图片上的文字)
-          // "thumb|1": [Mock.Random.image("300x250", "#000","#fff", "Random Image"), null], //缩略图，任意选一个，可有可无
-          "thumb|1": ["@image(300x250, @color, #fff, @natural)"], //随机颜色，随机数
-          createDate: `@date('T')` //创建时间：返回一个随机的日期字符串，时间戳
-        }
-      ]
-    }
+    data,
   })
 })
 

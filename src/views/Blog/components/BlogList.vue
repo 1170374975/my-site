@@ -26,6 +26,7 @@
         </div>
       </li>
     </ul>
+    <Empty v-if="!data.rows && !isLoading" />
     <Pager v-if="data.total"
       :current="routeInfo.page" 
       :total="data.total" 
@@ -38,6 +39,7 @@
 
 <script>
 import Pager from '@/components/Pager';
+import Empty from '@/components/Empty';
 import fetchData from '@/mixins/fetchData.js';//混入组件，获取远程数据
 import mainScroll from '@/mixins/mainScroll.js'; //混入组件，事件总线，监听主区域滚动事件以及回到顶部
 import { getBlogs } from '@/api/blog.js';  //获取blogList数据
@@ -48,7 +50,8 @@ export default {
   //混入  获取文章数据，数据格式是对象
   mixins: [fetchData({}), mainScroll("mainContainer")], 
   components: {
-    Pager
+    Pager,
+    Empty
   },
   computed: {
     //获取路由信息
